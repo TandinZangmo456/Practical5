@@ -1,7 +1,7 @@
 pipeline {
   agent any
   tools {
-    nodejs 'NodeJS-20.x'
+    nodejs 'NodeJS-20.0.2'
   }
   environment {
     CI = 'true'
@@ -33,7 +33,7 @@ pipeline {
       steps {
         dir('app') {
           script {
-            def image = "your-dockerhub-username/jenkins-node-app:${env.BUILD_NUMBER}"
+            def image = "penguintandinzangmo/jenkins-node-app:${env.BUILD_NUMBER}"
             sh "docker build -t $image ."
             sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
             sh "docker push $image"
